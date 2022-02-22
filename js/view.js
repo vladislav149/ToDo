@@ -1,0 +1,1 @@
+export const buttonAddTask = document.querySelectorAll('.todo__add-task');

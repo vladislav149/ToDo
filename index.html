@@ -7,13 +7,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Список дел</title>
   <link rel="stylesheet" href="css/reset.css">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
   <form class="todo" action="#">
+    <h2 class="status">HIGH</h2>
+    <label class="todo__box" for="#">
+      <input class="todo__new-task task" type="text" placeholder="Добавить важное дело">
+      <button class="todo__add-task btn" type="button"></button>
+    </label>
 
+    <ul class="list-tasks">
+      <li class="list-tasks__item task">
+        <input class="list-tasks__check" type="checkbox" id="checkbox-1">
+        <label class="list-tasks__text" for="checkbox-1">Вот вам и супер интересная тема.
+          Вы наверняка заметили что ваши файлы с кодом становятся все объемнее, что хочется вынести некоторые вещи
+          куда-то за пределы основной программы.</label>
+        <button class="list-tasks__delete btn" type="button"></button>
+
+      </li>
+
+      <li class="list-tasks__item task">
+        <input class="list-tasks__check" type="checkbox" id="checkbox-2">
+        <label class="list-tasks__text" for="checkbox-2">Сверстать этот TODO list</label>
+        <button class="list-tasks__delete btn" type="button"></button>
+      </li>
+
+      <li class="list-tasks__item task">
+        <input class="list-tasks__check" type="checkbox" id="checkbox-3">
+        <label class="list-tasks__text" for="checkbox-3">Начать делать задачу</label>
+        <button class="list-tasks__delete btn" type="button"></button>
+      </li>
+    </ul>
+
+    <h2 class="status">LOW</h2>
+    <label class="todo__box" for="#">
+      <input class="todo__new-task task" type="text" placeholder="Добавить дело">
+      <button class="todo__add-task btn" type="button"></button>
+    </label>
+
+    <ul class="list-tasks">
+      <li class="list-tasks__item task">
+        <input class="list-tasks__check" type="checkbox" id="checkbox-4">
+        <label class="list-tasks__text" for="checkbox-4">Посмотреть ютубчик</label>
+        <button class="list-tasks__delete btn" type="button"></button>
+      </li>
+    </ul>
   </form>
 </body>
 <script type="module" src="js/main.js"></script>
