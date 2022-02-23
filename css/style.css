@@ -20,6 +20,15 @@ body {
   letter-spacing: 0.06em;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  width: 476px;
+  padding: 25px 8px;
+  min-height: 700px;
+}
+
 .btn {
   height: 44px;
   width: 44px;
@@ -31,12 +40,7 @@ body {
   background-size: 20px;
 }
 
-.todo {
-  background-color: #ffffff;
-  width: 476px;
-  padding: 25px 8px;
-  min-height: 700px;
-}
+.todo {}
 
 .status {
   text-align: center;
@@ -120,4 +124,8 @@ body {
 
 .list-tasks__check:checked+.list-tasks__text::after {
   opacity: 1;
+}
+
+.list-tasks__check--active {
+  background-color: #F4F4F4;
 }
