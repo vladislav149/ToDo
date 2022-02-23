@@ -4,7 +4,7 @@ import {
   textTask
 } from './view.js';
 
-const idInputArr = ['checkbox-0', 'checkbox-1', 'checkbox-2', 'checkbox-3'];
+const idInputArr = [];
 
 buttonAddTask.forEach(function (item) {
   item.addEventListener("click", addNewTask)
@@ -22,9 +22,9 @@ function addNewTask() {
   let parentButton = this.parentElement;
   let listTask = parentButton.nextElementSibling;
   let input = parentButton.firstElementChild;
-  let textTask = input.value;
   let fredomId = findEmptyIdInput();
-  let isValidId = fredomId < idInputArr.length ? true : false;
+  let textTask = input.value;
+
   if (textTask) {
     listTask.insertAdjacentHTML('beforeend',
       `<li class="list-tasks__item task">
@@ -34,20 +34,34 @@ function addNewTask() {
       </li>`
     );
     input.value = '';
-    if (isValidId) {
-      idInputArr.splice(fredomId, 1, `checkbox-${fredomId}`);
-    } else {
-      idInputArr.push(`checkbox-${fredomId}`);
-    }
+    findEmptyIdArr(fredomId);
+
   } else {
     return
   }
 
+  let liNewTask = listTask.lastChild.querySelector('.list-tasks__text');
+  liNewTask.addEventListener("click", changeStatusTask);
+
+  let buttonDelete = listTask.lastChild.querySelector('.list-tasks__delete');
+  buttonDelete.addEventListener("click", deleteTask);
 }
+
+function findEmptyIdArr(fredomId) {
+  let isValidId = fredomId < idInputArr.length ? true : false;
+
+  if (isValidId) {
+    idInputArr.splice(fredomId, 1, `checkbox-${fredomId}`);
+  } else {
+    idInputArr.push(`checkbox-${fredomId}`);
+  }
+}
+
 
 function findEmptyIdInput() {
   let idInput = idInputArr.findIndex(item => item === undefined)
-  if ((Boolean(idInput + 1))) {
+  let isValiIdInput = (Boolean(idInput + 1)) ? true : false;
+  if (isValiIdInput) {
     return idInput;
   } else {
     idInput = idInputArr.length;

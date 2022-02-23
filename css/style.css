@@ -127,5 +127,6 @@ body {
 }
 
 .list-tasks__check--active {
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
+  transition: background-color 0.3s;
 }
