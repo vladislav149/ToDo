@@ -10,18 +10,13 @@ buttonAddTask.forEach(function (item) {
   item.addEventListener("click", addNewTask)
 });
 
-test();
+buttonDeleteTask.forEach(function (item) {
+  item.addEventListener("click", deleteTask)
+});
 
-function test() {
-  buttonDeleteTask.forEach(function (item) {
-    item.addEventListener("click", deleteTask)
-  });
-
-  textTask.forEach(function (item) {
-    item.addEventListener("click", changeStatusTask)
-  });
-}
-
+textTask.forEach(function (item) {
+  item.addEventListener("click", changeStatusTask)
+});
 
 function addNewTask() {
   let parentButton = this.parentElement;
@@ -47,7 +42,7 @@ function addNewTask() {
   } else {
     return
   }
-  test();
+
 }
 
 function findEmptyIdInput() {
