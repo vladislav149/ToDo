@@ -92,6 +92,7 @@ body {
 
 .list-tasks__text {
   cursor: pointer;
+  display: block;
 }
 
 .list-tasks__text::before {

@@ -6,6 +6,21 @@ import {
 
 const idInputArr = [];
 
+const STATUS = {
+  DONE: "Done",
+  TO_DO: "To do"
+}
+const PRIORITY = {
+  HIGH: "high",
+  LOW: "low"
+}
+
+const DEFAULT_STATUS = STATUS.TO_DO;
+
+const list = [];
+
+console.log(list);
+
 buttonAddTask.forEach(function (item) {
   item.addEventListener("click", addNewTask)
 });
@@ -23,7 +38,8 @@ function addNewTask() {
   let listTask = parentButton.nextElementSibling;
   let input = parentButton.firstElementChild;
   let fredomId = findEmptyIdInput();
-  let textTask = input.value;
+  let textTask = input.value.trim();
+  let priority = checkPriority(parentButton);
 
   if (textTask) {
     listTask.insertAdjacentHTML('beforeend',
@@ -35,8 +51,10 @@ function addNewTask() {
     );
     input.value = '';
     findEmptyIdArr(fredomId);
+    addTask(fredomId, textTask, priority);
 
   } else {
+    input.value = '';
     return
   }
 
@@ -51,7 +69,7 @@ function findEmptyIdArr(fredomId) {
   let isValidId = fredomId < idInputArr.length ? true : false;
 
   if (isValidId) {
-    idInputArr.splice(fredomId, 1, `checkbox-${fredomId}`);
+    idInputArr[fredomId] = `checkbox-${fredomId}`;
   } else {
     idInputArr.push(`checkbox-${fredomId}`);
   }
@@ -75,10 +93,43 @@ function deleteTask() {
   let idInput = input.id;
   let idInputIndex = idInputArr.findIndex(item => item === idInput);
   delete idInputArr[idInputIndex];
+  deleteTask1(idInputIndex)
   liDeleteTask.remove();
 }
 
 function changeStatusTask() {
   let parentTextTask = this.parentElement;
   parentTextTask.classList.toggle('list-tasks__check--active');
+}
+
+
+function addTask(id, textTask, priority) {
+  list[id] = {
+    name: textTask,
+    status: DEFAULT_STATUS,
+    priority: priority
+  };
+  console.log(list);
+}
+
+function checkPriority(parentButton) {
+
+  if (parentButton.classList.contains('high-priority')) {
+    return PRIORITY.HIGH;
+  } else {
+    return PRIORITY.LOW;
+  }
+}
+
+function deleteTask1(id) {
+  delete list[id];
+  console.log(list);
+}
+
+
+//TODO
+function changeStatus(parentTextTask) {
+  let input = parentTextTask.firstElementChild;
+
+
 }
