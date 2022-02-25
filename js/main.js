@@ -10,6 +10,7 @@ const STATUS = {
   DONE: "Done",
   TO_DO: "To do"
 }
+
 const PRIORITY = {
   HIGH: "high",
   LOW: "low"
@@ -18,8 +19,6 @@ const PRIORITY = {
 const DEFAULT_STATUS = STATUS.TO_DO;
 
 const list = [];
-
-console.log(list);
 
 buttonAddTask.forEach(function (item) {
   item.addEventListener("click", addNewTask)
@@ -75,7 +74,6 @@ function findEmptyIdArr(fredomId) {
   }
 }
 
-
 function findEmptyIdInput() {
   let idInput = idInputArr.findIndex(item => item === undefined)
   let isValiIdInput = (Boolean(idInput + 1)) ? true : false;
@@ -98,10 +96,10 @@ function deleteTask() {
 }
 
 function changeStatusTask() {
+  changeStatus(this);
   let parentTextTask = this.parentElement;
   parentTextTask.classList.toggle('list-tasks__check--active');
 }
-
 
 function addTask(id, textTask, priority) {
   list[id] = {
@@ -109,11 +107,9 @@ function addTask(id, textTask, priority) {
     status: DEFAULT_STATUS,
     priority: priority
   };
-  console.log(list);
 }
 
 function checkPriority(parentButton) {
-
   if (parentButton.classList.contains('high-priority')) {
     return PRIORITY.HIGH;
   } else {
@@ -123,13 +119,14 @@ function checkPriority(parentButton) {
 
 function deleteTask1(id) {
   delete list[id];
-  console.log(list);
 }
 
-
-//TODO
-function changeStatus(parentTextTask) {
-  let input = parentTextTask.firstElementChild;
-
-
+function changeStatus(label) {
+  let labelfor = label.htmlFor;
+  let whichId = idInputArr.findIndex(item => item === labelfor);
+  if (list[whichId].status === STATUS.TO_DO) {
+    list[whichId].status = STATUS.DONE
+  } else {
+    list[whichId].status = STATUS.TO_DO
+  }
 }
