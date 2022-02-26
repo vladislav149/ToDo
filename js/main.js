@@ -40,8 +40,8 @@ export function changeStatus(idTask) {
   }
 }
 
-export function checkPriority(checkClass) {
-  if (checkClass) {
+export function changePriority(checkPriority) {
+  if (checkPriority) {
     return PRIORITY.HIGH;
   } else {
     return PRIORITY.LOW;

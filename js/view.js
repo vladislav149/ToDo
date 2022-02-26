@@ -3,7 +3,7 @@ import {
   findEmptyIdInput,
   changeStatus,
   deleteTaskInList,
-  checkPriority
+  changePriority
 } from './main.js';
 
 
@@ -20,7 +20,7 @@ function addNewTask() {
   let fredomId = findEmptyIdInput();
   let textTask = input.value.trim();
   let checkClass = parentButton.classList.contains('high-priority');
-  let priority = checkPriority(checkClass);
+  let priority = changePriority(checkClass);
 
   if (textTask) {
     listTask.insertAdjacentHTML('beforeend',
