@@ -93,6 +93,7 @@ body {
 .list-tasks__text {
   cursor: pointer;
   display: block;
+  overflow-wrap: break-word;
 }
 
 .list-tasks__text::before {

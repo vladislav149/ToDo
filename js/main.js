@@ -4,8 +4,6 @@ import {
   textTask
 } from './view.js';
 
-const idInputArr = [];
-
 const STATUS = {
   DONE: "Done",
   TO_DO: "To do"
@@ -49,9 +47,8 @@ function addNewTask() {
       </li>`
     );
     input.value = '';
-    findEmptyIdArr(fredomId);
-    addTask(fredomId, textTask, priority);
-
+    let id = `checkbox-${fredomId}`;
+    addTask(fredomId, textTask, priority, id);
   } else {
     input.value = '';
     return
@@ -64,23 +61,13 @@ function addNewTask() {
   buttonDelete.addEventListener("click", deleteTask);
 }
 
-function findEmptyIdArr(fredomId) {
-  let isValidId = fredomId < idInputArr.length ? true : false;
-
-  if (isValidId) {
-    idInputArr[fredomId] = `checkbox-${fredomId}`;
-  } else {
-    idInputArr.push(`checkbox-${fredomId}`);
-  }
-}
-
 function findEmptyIdInput() {
-  let idInput = idInputArr.findIndex(item => item === undefined)
+  let idInput = list.findIndex(item => item === undefined)
   let isValiIdInput = (Boolean(idInput + 1)) ? true : false;
   if (isValiIdInput) {
     return idInput;
   } else {
-    idInput = idInputArr.length;
+    idInput = list.length;
   }
   return idInput;
 }
@@ -89,10 +76,15 @@ function deleteTask() {
   let liDeleteTask = this.parentElement;
   let input = liDeleteTask.querySelector('input');
   let idInput = input.id;
-  let idInputIndex = idInputArr.findIndex(item => item === idInput);
-  delete idInputArr[idInputIndex];
-  deleteTask1(idInputIndex)
+  let idInputIndex = list.findIndex(item => {
+    if (!item) {
+      console.log('error');
+    } else if (item.id === idInput) {
+      return item.id
+    }
+  });
   liDeleteTask.remove();
+  delete list[idInputIndex];
 }
 
 function changeStatusTask() {
@@ -101,11 +93,12 @@ function changeStatusTask() {
   parentTextTask.classList.toggle('list-tasks__check--active');
 }
 
-function addTask(id, textTask, priority) {
+function addTask(id, textTask, priority, idInput) {
   list[id] = {
     name: textTask,
     status: DEFAULT_STATUS,
-    priority: priority
+    priority: priority,
+    id: idInput
   };
 }
 
@@ -117,13 +110,9 @@ function checkPriority(parentButton) {
   }
 }
 
-function deleteTask1(id) {
-  delete list[id];
-}
-
 function changeStatus(label) {
   let labelfor = label.htmlFor;
-  let whichId = idInputArr.findIndex(item => item === labelfor);
+  let whichId = list.findIndex(item => item.id === labelfor);
   if (list[whichId].status === STATUS.TO_DO) {
     list[whichId].status = STATUS.DONE
   } else {
